@@ -26,7 +26,7 @@ const Savings = mongoose.model('Savings', savingsSchema);
 app.get('/api/savings', async (req, res) => {
     try {
         const savings = await Savings.find().sort({ date: -1 });
-        const userNames = ["ออมสิน", "เบนซ์", "แพร", "มิ้ว"];
+        const userNames = ["ออมสิน", "รถเบนซ์", "แพรวา", "มิ้ว"];
         let initialTotals = { total: 0 };
         userNames.forEach(name => initialTotals[name] = 0);
         

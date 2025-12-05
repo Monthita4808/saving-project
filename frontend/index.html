@@ -344,8 +344,8 @@
 
     <header class="hero-section">
         <div class="overlay">
-            <h1>🌊 **Saving Tides** | การออมของกลุ่มเรา</h1>
-            <p>ยอดเงินรวมทั้งหมดที่พวกเราช่วยกันออม</p>
+            <h1>🌊 **Saving Tides** | บัญชีลับ </h1>
+            <p>ยอดเงินรวมทั้งหมด</p>
             <div class="total-savings-hero">
                 <h2 id="totalAmount">0.00 บาท</h2>
             </div>
@@ -360,12 +360,12 @@
                 <p id="amountออมสิน" class="amount">0.00 บาท</p>
             </div>
             <div class="card user-card">
-                <h3>เบนซ์</h3>
-                <p id="amountเบนซ์" class="amount">0.00 บาท</p>
+                <h3>รถเบนซ์</h3>
+                <p id="amountรถเบนซ์" class="amount">0.00 บาท</p>
             </div>
             <div class="card user-card">
-                <h3>แพร</h3>
-                <p id="amountแพร" class="amount">0.00 บาท</p>
+                <h3>แพรวา</h3>
+                <p id="amountแพรวา" class="amount">0.00 บาท</p>
             </div>
             <div class="card user-card">
                 <h3>มิ้ว</h3>
@@ -383,8 +383,8 @@
                 <select id="depositorName" name="depositorName" required>
                     <option value="">-- เลือกชื่อ --</option>
                     <option value="ออมสิน">ออมสิน</option>
-                    <option value="เบนซ์">เบนซ์</option>
-                    <option value="แพร">แพร</option>
+                    <option value="เบนซ์">รถเบนซ์</option>
+                    <option value="แพร">แพรวา</option>
                     <option value="มิ้ว">มิ้ว</option>
                 </select>
 
@@ -397,9 +397,9 @@
                 <h3>4. สแกน QR Code เพื่อโอนเงิน</h3>
             <div class="qr-code-box">
                 <!-- ใช้ Placeholder ที่เข้ากับธีมทะเล -->
-                <img src="https://placehold.co/200x200/17a2b8/FFFFFF?text=QR+Code" alt="QR Code สำหรับโอนเงิน" style="width: 200px; height: auto; display: block; margin: 0 auto;">
+                <img src="QR.jpg" alt="QR Code สำหรับโอนเงิน" style="width: 200px; height: auto; display: block; margin: 0 auto;">
                 
-                <p style="margin-top: 10px;">ธนาคาร: XXXXXX | ชื่อบัญชี: กลุ่มออมเงิน</p>
+                <p style="margin-top: 10px;">ธนาคาร: กสิกรไทย | ชื่อบัญชี: มณฑิตา</p>
             </div>
 
                 <label for="slipUpload">5. อัปโหลดสลิป (รูปภาพเท่านั้น):</label>
@@ -454,7 +454,7 @@
         const BACKEND_URL = 'https://disciplined-adventure-production-3f49.up.railway.app';
         
         // กำหนดชื่อสมาชิกในกลุ่ม
-        const MEMBERS = ["ออมสิน", "เบนซ์", "แพร", "มิ้ว"];
+        const MEMBERS = ["ออมสิน", "รถเบนซ์", "แพรวา", "มิ้ว"];
 
         const savingForm = document.getElementById('savingForm');
         const transactionTableBody = document.getElementById('transactionTableBody');
