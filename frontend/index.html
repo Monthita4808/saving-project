@@ -22,16 +22,23 @@
             color: #007bff; /* สีน้ำเงินทะเล */
         }
 
-        /* ส่วนหัว (Hero Section) - ใช้ Gradient แทนรูปภาพที่ไม่สามารถโหลดได้ */
+        /* ส่วนหัว (Hero Section) - เปลี่ยนเป็นรูปภาพพื้นหลัง */
         .hero-section {
-            /* สร้าง Gradient คล้ายน้ำทะเลและทราย */
-            background: linear-gradient(135deg, #007bff 0%, #17a2b8 60%, #ffc107 100%); 
+            /* ใส่ URL ของรูปภาพที่นี่ (สามารถเปลี่ยนลิงก์เป็นรูปที่คุณต้องการได้) */
+            background-image: url('beach_bg.jpg');
+            
+            /* จัดการการแสดงผลของรูปภาพ */
+            background-size: cover;      /* ให้รูปขยายเต็มพื้นที่ */
+            background-position: center; /* ให้จุดกึ่งกลางของรูปอยู่ตรงกลางเสมอ */
+            background-repeat: no-repeat;
+            
             color: white;
             text-align: center;
-            padding: 80px 20px;
+            padding: 100px 20px; /* เพิ่มความสูงอีกนิดให้เห็นรูปชัดขึ้น */
             position: relative;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
+
 
         .overlay {
             background-color: rgba(0, 0, 0, 0.2); /* สร้างความโปร่งใสให้ข้อความอ่านง่าย */
