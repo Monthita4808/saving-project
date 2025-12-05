@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "json2csv": "^6.0.0-alpha.2",
+    "mongoose": "^9.0.0",
+    "multer": "^2.0.2"
+  }
+}

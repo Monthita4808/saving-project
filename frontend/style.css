@@ -1,0 +1,148 @@
+/* frontend/style.css - ปรับปรุงดีไซน์ */
+
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #f0f4f7; /* สีพื้นหลังอ่อน ๆ */
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #007bff; /* สีน้ำเงินทะเล */
+}
+
+/* ส่วนหัว (Hero Section) - พื้นหลังภาพทะเล */
+.hero-section {
+    background-image: url('beach_bg.jpg'); /* ภาพทะเลสวย ๆ */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.3); /* สร้างความโปร่งใสให้ข้อความอ่านง่าย */
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.hero-section h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.total-savings-hero h2 {
+    font-size: 4em;
+    margin-top: 10px;
+    color: #ffc107; /* สีเหลืองทองคล้ายทราย */
+}
+
+/* กรอบหลักสำหรับ Section ต่างๆ (คล้ายกรอบภาพในรูปตัวอย่าง) */
+section {
+    padding: 40px 5%;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Dashboard Cards */
+.dashboard-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #17a2b8; /* สีฟ้าน้ำทะเล */
+}
+
+.dashboard-cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.card {
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    background-color: #e6f7ff; /* สีฟ้าอ่อน */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.amount {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+/* Deposit Form */
+.deposit-form-container {
+    background-color: #fff;
+    padding: 25px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+/* ... (โค้ด CSS สำหรับฟอร์มและปุ่มเดิม) ... */
+#savingForm input[type="date"],
+#savingForm input[type="number"],
+#savingForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#submitBtn {
+    background-color: #007bff;
+    /* ... (โค้ดปุ่มเดิม) ... */
+}
+
+.qr-code-box {
+    /* ... (โค้ด QR Box เดิม) ... */
+    border: 2px dashed #17a2b8; /* เปลี่ยนสีเส้นประ */
+    color: #17a2b8;
+}
+
+/* History Section */
+.history-section table {
+    /* ... (โค้ดตารางเดิม) ... */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.history-section th {
+    background-color: #007bff;
+    color: white;
+}
+
+.history-section tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #343a40;
+    color: #adb5bd;
+    margin-top: 30px;
+}

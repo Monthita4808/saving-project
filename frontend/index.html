@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบออมเงินกลุ่มเพื่อน</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="hero-section">
+        <div class="overlay">
+            <h1>🌊 **Saving Tides** | การออมของกลุ่มเรา</h1>
+            <p>ยอดเงินรวมทั้งหมดที่พวกเราช่วยกันออม</p>
+            <div class="total-savings-hero">
+                <h2 id="totalAmount">0.00 บาท</h2>
+            </div>
+        </div>
+    </header>
+
+    <section class="dashboard-section">
+        <h2>🐳 ยอดออมแยกรายบุคคล</h2>
+        <div class="dashboard-cards">
+            <div class="card user-card">
+                <h3>ออมสิน</h3>
+                <p id="amountออมสิน" class="amount">0.00 บาท</p>
+            </div>
+            <div class="card user-card">
+                <h3>เบนซ์</h3>
+                <p id="amountเบนซ์" class="amount">0.00 บาท</p>
+            </div>
+            <div class="card user-card">
+                <h3>แพร</h3>
+                <p id="amountแพร" class="amount">0.00 บาท</p>
+            </div>
+            <div class="card user-card">
+                <h3>มิ้ว</h3>
+                <p id="amountมิ้ว" class="amount">0.00 บาท</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="deposit-section">
+        <h2>🏝️ บันทึกรายการออมใหม่</h2>
+        <div class="deposit-form-container">
+            <form id="savingForm" enctype="multipart/form-data">
+                
+                <label for="depositorName">1. ชื่อผู้ออม:</label>
+                <select id="depositorName" name="depositorName" required>
+                    <option value="">-- เลือกชื่อ --</option>
+                    <option value="ออมสิน">ออมสิน</option>
+                    <option value="เบนซ์">เบนซ์</option>
+                    <option value="แพร">แพร</option>
+                    <option value="มิ้ว">มิ้ว</option>
+                </select>
+
+                <label for="depositDate">2. วันที่ออม:</label>
+                <input type="date" id="depositDate" name="depositDate" required>
+
+                <label for="depositAmount">3. จำนวนเงิน (บาท):</label>
+                <input type="number" id="depositAmount" name="depositAmount" min="1" step="0.01" required>
+
+                <h3>4. สแกน QR Code เพื่อโอนเงิน</h3>
+            <div class="qr-code-box">
+                <img src="my_qr.png" alt="QR Code สำหรับโอนเงิน" style="width: 200px; height: auto; display: block; margin: 0 auto;">
+                
+                <p style="margin-top: 10px;">ธนาคาร: XXXXXX | ชื่อบัญชี: กลุ่มออมเงิน</p>
+            </div>
+
+                <label for="slipUpload">5. อัปโหลดสลิป (รูปภาพเท่านั้น):</label>
+                <input type="file" id="slipUpload" name="slipUpload" accept="image/*" required>
+
+                <button type="submit" id="submitBtn">บันทึกการออม</button>
+                <div id="message" class="message-box"></div>
+            </form>
+        </div>
+    </section>
+
+    <section class="history-section">
+        <h2>📜 ประวัติการออมทั้งหมด</h2>
+        <div class="table-container">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>วันที่บันทึก</th>
+                        <th>ชื่อผู้ออม</th>
+                        <th>จำนวนเงิน</th>
+                        <th>ดูสลิป</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTableBody">
+                    </tbody>
+            </table>
+        </div>
+        
+        <div class="export-section">
+            <button id="exportCsvBtn">⬇️ ส่งออกข้อมูลเป็น Excel (CSV)</button>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Group Savings Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
