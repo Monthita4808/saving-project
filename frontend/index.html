@@ -4,454 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ระบบออมเงินกลุ่มเพื่อน</title>
-    <!-- CSS ทั้งหมดถูกรวมไว้ใน <style> block เพื่อให้รันได้ในไฟล์เดียว -->
+    <!-- โหลด Tailwind CSS CDN สำหรับการจัดสไตล์ -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* นำเข้าฟอนต์ Sarabun เพื่อรองรับภาษาไทย */
+        /* กำหนดฟอนต์ Sarabun เป็นหลักสำหรับภาษาไทย */
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
-        
         body {
             font-family: 'Sarabun', 'Arial', sans-serif;
-            padding: 0;
-            margin: 0;
-            background-color: #f0f4f7; /* สีพื้นหลังอ่อน ๆ */
-            color: #333;
-            line-height: 1.6;
         }
 
-        h1, h2, h3 {
-            color: #007bff; /* สีน้ำเงินทะเล */
-        }
-
-        /* ส่วนหัว (Hero Section) - เปลี่ยนเป็นรูปภาพพื้นหลัง */
+        /* Hero Section Background (ใช้ Placeholder ที่ปลอดภัย) */
         .hero-section {
-            /* ใส่ URL ของรูปภาพที่นี่ (สามารถเปลี่ยนลิงก์เป็นรูปที่คุณต้องการได้) */
-            background-image: url('beach_bg.jpg');
-            
-            /* จัดการการแสดงผลของรูปภาพ */
-            background-size: cover;      /* ให้รูปขยายเต็มพื้นที่ */
-            background-position: center; /* ให้จุดกึ่งกลางของรูปอยู่ตรงกลางเสมอ */
-            background-repeat: no-repeat;
-            
-            color: white;
-            text-align: center;
-            padding: 100px 20px; /* เพิ่มความสูงอีกนิดให้เห็นรูปชัดขึ้น */
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            background-image: url('https://placehold.co/1200x400/17a2b8/ffffff?text=Saving+for+Vacation');
+            background-size: cover; 
+            background-position: center; 
         }
 
-
-        .overlay {
-            background-color: rgba(0, 0, 0, 0.2); /* สร้างความโปร่งใสให้ข้อความอ่านง่าย */
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero-section h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .total-savings-hero {
-            /* ปรับปรุงกรอบยอดรวม */
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px 40px;
-            border-radius: 12px;
-            display: inline-block;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-        }
-
-        .total-savings-hero h2 {
-            font-size: 3.5em; /* ลดขนาดลงเล็กน้อยเพื่อให้ดูดีบนมือถือ */
-            margin-top: 0;
-            margin-bottom: 0;
-            color: #ffc107; /* สีเหลืองทองคล้ายทราย */
-            font-weight: bold;
-        }
-
-        /* กรอบหลักสำหรับ Section ต่างๆ */
-        section {
-            padding: 40px 5%;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        h2 {
-            font-size: 1.8rem;
-            color: #17a2b8; /* สีฟ้าน้ำทะเล */
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 30px;
-        }
-
-        /* Dashboard Cards */
-        .dashboard-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 20px;
-        }
-
-        .card {
-            border: none;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            flex: 1 1 200px;
-            background-color: #e6f7ff; /* สีฟ้าอ่อน */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-        }
-        .card h3 {
-            color: #0056b3;
-            font-size: 1.5em;
-        }
-        .amount {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #007bff;
-        }
-
-        /* Deposit Form */
-        .deposit-form-container {
-            background-color: #fff;
-            padding: 30px;
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-        }
-        
-        form label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-            color: #0056b3;
-        }
-        
-        #savingForm input[type="date"],
-        #savingForm input[type="number"],
-        #savingForm select,
-        #savingForm input[type="file"] {
-            width: 100%;
-            padding: 12px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-        
-        .qr-code-box {
-            text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-            border: 2px dashed #17a2b8; /* เปลี่ยนสีเส้นประ */
-            border-radius: 10px;
-            background-color: #f8ffff;
-            color: #17a2b8;
-        }
-
-        #submitBtn {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            margin-top: 25px;
-            width: 100%;
-            transition: background-color 0.3s;
-            box-shadow: 0 4px #0056b3;
-        }
-        #submitBtn:hover {
-            background-color: #0056b3;
-            box-shadow: 0 2px #003f8a;
-            transform: translateY(2px);
-        }
-
-        /* History Table */
-        .table-container {
-            overflow-x: auto;
-        }
-        table {
-            border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 0.9em;
-            min-width: 400px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            width: 100%; /* สำคัญสำหรับ responsive */
-        }
-        table thead tr {
-            background-color: #007bff; /* สีน้ำเงินเข้มตามดีไซน์ใหม่ */
-            color: #ffffff;
-            text-align: center;
-        }
-        table th,
-        table td {
-            padding: 12px 15px;
-            text-align: center;
-        }
-        table tbody tr {
-            border-bottom: 1px solid #dddddd;
-        }
-        table tbody tr:nth-of-type(even) {
-            background-color: #f7f7f7; /* สีสลับแถว */
-        }
-        table tbody tr:last-of-type {
-            border-bottom: 2px solid #007bff;
-        }
-
-        .view-slip-btn {
-            background-color: #28a745; /* สีเขียว */
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .view-slip-btn:hover {
-            background-color: #218838;
-        }
-        .export-section {
-            text-align: center;
-            margin-top: 20px;
-        }
-        #exportCsvBtn {
-            background-color: #ffc107; /* สีเหลืองทอง */
-            color: #333;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-            font-weight: bold;
-        }
-        #exportCsvBtn:hover {
-            background-color: #e0a800;
-        }
-
-        /* Message Box (Functional styles kept) */
-        .message-box {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: bold;
-            display: none;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        /* Modal for Slip View (Functional styles kept) */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7);
-        }
-        .modal-content {
-            margin: 10% auto;
-            padding: 20px;
-            width: 80%;
-            max-width: 500px;
-            background-color: #fefefe;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            position: relative;
-            text-align: center;
-        }
-        .modal-content img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 10px auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close-btn:hover,
-        .close-btn:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #343a40; /* สีเข้มตามดีไซน์ใหม่ */
-            color: #adb5bd;
-            margin-top: 40px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2.5em;
-            }
-            .total-savings-hero h2 {
-                font-size: 2.5em;
-            }
-            .dashboard-cards {
-                flex-direction: column;
-            }
-            .card {
-                flex: 1 1 100%;
-            }
+        /* สไตล์สำหรับ QR Code Placeholder */
+        .qr-placeholder {
+            filter: grayscale(80%);
+            opacity: 0.8;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-700">
 
-    <header class="hero-section">
-        <div class="overlay">
-            <h1>🌊 **Saving Tides** | บัญชีลับ </h1>
-            <p>ยอดเงินรวมทั้งหมด</p>
-            <div class="total-savings-hero">
-                <h2 id="totalAmount">0.00 บาท</h2>
+    <!-- Hero Section (ส่วนหัว) -->
+    <header class="hero-section text-white text-center py-20 md:py-32 shadow-2xl">
+        <div class="bg-black/20 p-6 rounded-xl max-w-5xl mx-auto backdrop-blur-sm">
+            <h1 class="text-4xl md:text-5xl font-bold mb-3 drop-shadow-lg">🌊 **Saving Tides** | บัญชีลับ </h1>
+            <p class="text-xl mb-4">ยอดเงินรวมทั้งหมด</p>
+            <div class="inline-block bg-white/95 p-6 md:p-8 rounded-2xl shadow-xl mt-4">
+                <h2 id="totalAmount" class="text-5xl md:text-6xl font-extrabold text-yellow-500 tracking-wider">0.00 บาท</h2>
             </div>
+            <!-- แสดง User ID สำหรับการระบุตัวตนในระบบ Firestore -->
+            <p id="userIdDisplay" class="text-xs mt-3 text-gray-100"></p>
         </div>
     </header>
 
-    <section class="dashboard-section">
-        <h2>🐳 ยอดออมแยกรายบุคคล</h2>
-        <div class="dashboard-cards">
-            <div class="card user-card">
-                <h3>ออมสิน</h3>
-                <p id="amountออมสิน" class="amount">0.00 บาท</p>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+
+        <!-- Dashboard Cards (ยอดออมแยกรายบุคคล) -->
+        <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mb-10">
+            <h2 class="text-3xl font-bold text-cyan-600 text-center mb-8">🐳 ยอดออมแยกรายบุคคล</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <!-- Card Template -->
+                <div class="bg-blue-50 p-5 rounded-xl shadow-md text-center border-t-4 border-blue-400 transition transform hover:shadow-xl hover:scale-[1.02]">
+                    <h3 class="text-xl font-semibold text-blue-800">ออมสิน</h3>
+                    <p id="amountออมสิน" class="text-3xl font-extrabold text-blue-600 mt-2">0.00 บาท</p>
+                </div>
+                <div class="bg-blue-50 p-5 rounded-xl shadow-md text-center border-t-4 border-blue-400 transition transform hover:shadow-xl hover:scale-[1.02]">
+                    <h3 class="text-xl font-semibold text-blue-800">รถเบนซ์</h3>
+                    <p id="amountรถเบนซ์" class="text-3xl font-extrabold text-blue-600 mt-2">0.00 บาท</p>
+                </div>
+                <div class="bg-blue-50 p-5 rounded-xl shadow-md text-center border-t-4 border-blue-400 transition transform hover:shadow-xl hover:scale-[1.02]">
+                    <h3 class="text-xl font-semibold text-blue-800">แพรวา</h3>
+                    <p id="amountแพรวา" class="text-3xl font-extrabold text-blue-600 mt-2">0.00 บาท</p>
+                </div>
+                <div class="bg-blue-50 p-5 rounded-xl shadow-md text-center border-t-4 border-blue-400 transition transform hover:shadow-xl hover:scale-[1.02]">
+                    <h3 class="text-xl font-semibold text-blue-800">มิ้ว</h3>
+                    <p id="amountมิ้ว" class="text-3xl font-extrabold text-blue-600 mt-2">0.00 บาท</p>
+                </div>
             </div>
-            <div class="card user-card">
-                <h3>รถเบนซ์</h3>
-                <p id="amountรถเบนซ์" class="amount">0.00 บาท</p>
+        </section>
+
+        <!-- Deposit Form (บันทึกรายการออมใหม่) -->
+        <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mb-10">
+            <h2 class="text-3xl font-bold text-cyan-600 text-center mb-8">🏝️ บันทึกรายการออมใหม่</h2>
+            <div class="max-w-xl mx-auto bg-gray-50 p-6 rounded-lg shadow-inner">
+                <form id="savingForm">
+                    
+                    <label for="depositorName" class="block mt-4 text-lg font-semibold text-blue-800">1. ชื่อผู้ออม:</label>
+                    <select id="depositorName" name="depositorName" required class="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">-- เลือกชื่อ --</option>
+                        <option value="ออมสิน">ออมสิน</option>
+                        <option value="รถเบนซ์">รถเบนซ์</option>
+                        <option value="แพรวา">แพรวา</option>
+                        <option value="มิ้ว">มิ้ว</option>
+                    </select>
+
+                    <label for="depositDate" class="block mt-4 text-lg font-semibold text-blue-800">2. วันที่ออม:</label>
+                    <input type="date" id="depositDate" name="depositDate" required class="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+
+                    <label for="depositAmount" class="block mt-4 text-lg font-semibold text-blue-800">3. จำนวนเงิน (บาท):</label>
+                    <input type="number" id="depositAmount" name="depositAmount" min="1" step="0.01" required class="mt-2 w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="ตัวอย่าง: 500.00">
+
+                    <h3 class="text-xl font-semibold text-blue-800 mt-6">4. สแกน QR Code เพื่อโอนเงิน</h3>
+                    <div class="text-center my-6 p-6 border-2 border-dashed border-cyan-400 rounded-xl bg-cyan-50">
+                        <!-- QR Code Placeholder ยังคงอยู่สำหรับการโอน แต่ระบบจะไม่บังคับให้แนบสลิป -->
+                        <img src="https://placehold.co/200x200/17a2b8/ffffff?text=QR+Code" alt="QR Code สำหรับโอนเงิน" class="qr-placeholder w-48 h-48 block mx-auto rounded-md">
+                        <p class="mt-3 text-cyan-700 font-medium">ธนาคาร: กสิกรไทย | ชื่อบัญชี: มณฑิตา</p>
+                    </div>
+
+                    <!-- **ช่องอัปโหลดสลิปถูกนำออกเพื่อรองรับการทำงานกับ Firestore** -->
+
+                    <button type="submit" id="submitBtn" class="w-full bg-blue-600 text-white p-4 rounded-xl text-xl font-bold mt-8 shadow-lg transition transform hover:bg-blue-700 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        บันทึกการออม
+                    </button>
+                    <div id="message" class="message-box mt-4 hidden"></div>
+                </form>
             </div>
-            <div class="card user-card">
-                <h3>แพรวา</h3>
-                <p id="amountแพรวา" class="amount">0.00 บาท</p>
+        </section>
+
+        <!-- History Table (ประวัติการออมทั้งหมด) -->
+        <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg mb-10">
+            <h2 class="text-3xl font-bold text-cyan-600 text-center mb-8">📜 ประวัติการออมทั้งหมด</h2>
+            <div class="overflow-x-auto shadow-xl rounded-xl">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 text-center text-sm font-medium uppercase tracking-wider rounded-tl-xl">วันที่บันทึก</th>
+                            <th scope="col" class="px-6 py-4 text-center text-sm font-medium uppercase tracking-wider">ชื่อผู้ออม</th>
+                            <th scope="col" class="px-6 py-4 text-center text-sm font-medium uppercase tracking-wider rounded-tr-xl">จำนวนเงิน (บาท)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionTableBody" class="bg-white divide-y divide-gray-200">
+                        <!-- Data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
             </div>
-            <div class="card user-card">
-                <h3>มิ้ว</h3>
-                <p id="amountมิ้ว" class="amount">0.00 บาท</p>
+            
+            <div class="text-center mt-6">
+                <!-- ปุ่มส่งออก CSV ถูกนำออกเนื่องจากไม่มี Backend สำหรับประมวลผลการส่งออก -->
+                <p class="text-gray-500">
+                    *ฟังก์ชันส่งออกข้อมูลถูกระงับชั่วคราว เนื่องจาก Backend Server ภายนอกมีปัญหา
+                </p>
             </div>
-        </div>
-    </section>
-
-    <section class="deposit-section">
-        <h2>🏝️ บันทึกรายการออมใหม่</h2>
-        <div class="deposit-form-container">
-            <form id="savingForm" enctype="multipart/form-data">
-                
-                <label for="depositorName">1. ชื่อผู้ออม:</label>
-                <select id="depositorName" name="depositorName" required>
-                    <option value="">-- เลือกชื่อ --</option>
-                    <option value="ออมสิน">ออมสิน</option>
-                    <option value="เบนซ์">รถเบนซ์</option>
-                    <option value="แพร">แพรวา</option>
-                    <option value="มิ้ว">มิ้ว</option>
-                </select>
-
-                <label for="depositDate">2. วันที่ออม:</label>
-                <input type="date" id="depositDate" name="depositDate" required>
-
-                <label for="depositAmount">3. จำนวนเงิน (บาท):</label>
-                <input type="number" id="depositAmount" name="depositAmount" min="1" step="0.01" required>
-
-                <h3>4. สแกน QR Code เพื่อโอนเงิน</h3>
-            <div class="qr-code-box">
-                <!-- ใช้ Placeholder ที่เข้ากับธีมทะเล -->
-                <img src="QR.jpg" alt="QR Code สำหรับโอนเงิน" style="width: 200px; height: auto; display: block; margin: 0 auto;">
-                
-                <p style="margin-top: 10px;">ธนาคาร: กสิกรไทย | ชื่อบัญชี: มณฑิตา</p>
-            </div>
-
-                <label for="slipUpload">5. อัปโหลดสลิป (รูปภาพเท่านั้น):</label>
-                <input type="file" id="slipUpload" name="slipUpload" accept="image/*" required>
-
-                <button type="submit" id="submitBtn">บันทึกการออม</button>
-                <div id="message" class="message-box"></div>
-            </form>
-        </div>
-    </section>
-
-    <section class="history-section">
-        <h2>📜 ประวัติการออมทั้งหมด</h2>
-        <div class="table-container">
-            <table width="100%">
-                <thead>
-                    <tr>
-                        <th>วันที่บันทึก</th>
-                        <th>ชื่อผู้ออม</th>
-                        <th>จำนวนเงิน</th>
-                        <th>ดูสลิป</th>
-                    </tr>
-                </thead>
-                <tbody id="transactionTableBody">
-                    <!-- Data will be inserted here by JavaScript -->
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="export-section">
-            <button id="exportCsvBtn">⬇️ ส่งออกข้อมูลเป็น Excel (CSV)</button>
-        </div>
-    </section>
+        </section>
+    </main>
     
-    <footer>
-        <p>&copy; 2025 Group Savings Project</p>
+    <footer class="text-center py-6 bg-gray-800 text-gray-400 mt-10">
+        <p>&copy; 2025 Saving Tides Project</p>
     </footer>
 
-    <!-- Modal Structure for Viewing Slip -->
-    <div id="slipModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="document.getElementById('slipModal').style.display='none'">&times;</span>
-            <h3>สลิปการโอนเงิน</h3>
-            <img id="modalSlipImage" src="" alt="สลิปการโอนเงิน">
-            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">* รูปภาพสลิปที่เก็บไว้บน Server</p>
-        </div>
-    </div>
 
-
-    <script>
-        // ** 1. กำหนด URL ของ Server Backend ที่ Deploy บน Railway **
-        const BACKEND_URL = 'https://disciplined-adventure-production-3f49.up.railway.app';
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
         // กำหนดชื่อสมาชิกในกลุ่ม
         const MEMBERS = ["ออมสิน", "รถเบนซ์", "แพรวา", "มิ้ว"];
@@ -461,15 +152,72 @@
         const totalAmountElement = document.getElementById('totalAmount');
         const messageBox = document.getElementById('message');
         const submitBtn = document.getElementById('submitBtn');
-        const exportCsvBtn = document.getElementById('exportCsvBtn');
-        const slipModal = document.getElementById('slipModal');
-        const modalSlipImage = document.getElementById('modalSlipImage');
+        const userIdDisplay = document.getElementById('userIdDisplay');
 
+        // -------------------------------------------------------------------
+        // 1. Firebase Initialization and Auth
+        // -------------------------------------------------------------------
+
+        setLogLevel('Debug'); // เปิดใช้งาน Debug log
+
+        // Global variables provided by the Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId = null;
+        
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+
+            if (initialAuthToken) {
+                signInWithCustomToken(auth, initialAuthToken).catch(e => {
+                    console.error("Custom token sign-in failed, falling back to anonymous:", e);
+                    signInAnonymously(auth);
+                });
+            } else {
+                signInAnonymously(auth);
+            }
+        } catch (e) {
+            console.error("Firebase initialization failed:", e);
+            showMessage('ระบบฐานข้อมูล (Firebase) มีปัญหาในการเริ่มต้น กรุณาลองใหม่อีกครั้ง', 'error');
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userId = user.uid;
+                userIdDisplay.textContent = `User ID: ${userId}`;
+                console.log("Firebase Auth Ready. User ID:", userId);
+                setupRealtimeListener(); // เมื่อ Auth สำเร็จ จึงเริ่มดึงข้อมูล
+            } else {
+                // User is signed out, but anonymous sign-in usually keeps a user session.
+                showMessage('ไม่สามารถเข้าสู่ระบบเพื่อใช้งานฐานข้อมูลได้', 'error');
+            }
+        });
+
+        // ฟังก์ชันกำหนด Collection Path
+        function getCollectionPath() {
+            if (!userId) {
+                throw new Error("User ID is not available for Firestore operations.");
+            }
+            // Private data storage path: /artifacts/{appId}/users/{userId}/savings
+            return `artifacts/${appId}/users/${userId}/savings`;
+        }
+        
         // ฟังก์ชันแสดงข้อความแจ้งเตือน (แทน alert)
         function showMessage(msg, type = 'success') {
             messageBox.textContent = msg;
-            messageBox.className = `message-box ${type}`;
+            messageBox.classList.remove('bg-red-100', 'text-red-700', 'border-red-400', 'bg-green-100', 'text-green-700', 'border-green-400');
+
+            if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'text-green-700', 'border', 'border-green-400', 'p-3', 'rounded-lg', 'font-medium', 'block');
+            } else {
+                messageBox.classList.add('bg-red-100', 'text-red-700', 'border', 'border-red-400', 'p-3', 'rounded-lg', 'font-medium', 'block');
+            }
             messageBox.style.display = 'block';
+
             setTimeout(() => {
                 messageBox.style.display = 'none';
             }, 5000);
@@ -481,98 +229,126 @@
         }
 
         // -------------------------------------------------------------------
-        // 2. ฟังก์ชันดึงข้อมูลยอดรวมและประวัติ (Fetch Data)
+        // 2. ฟังก์ชันดึงข้อมูลยอดรวมและประวัติ (Real-time Listener)
         // -------------------------------------------------------------------
 
-        async function fetchSavingsData() {
+        function setupRealtimeListener() {
             try {
-                // ดึงข้อมูลรายการทั้งหมดจาก Backend
-                const response = await fetch(`${BACKEND_URL}/api/savings`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data from server.');
-                }
-                const data = await response.json();
+                const savingsCollectionRef = collection(db, getCollectionPath());
                 
-                // 2.1 แสดงยอดรวมทั้งหมด
-                const totalSavings = data.transactions.reduce((sum, t) => sum + t.amount, 0);
-                totalAmountElement.textContent = formatCurrency(totalSavings);
+                // Query: ดึงข้อมูลทั้งหมด และเรียงลำดับตาม createdAt จากใหม่ไปเก่า
+                const q = query(savingsCollectionRef, orderBy('createdAt', 'desc'));
 
-                // 2.2 แสดงยอดออมแยกรายบุคคล
-                const memberTotals = MEMBERS.reduce((acc, member) => {
-                    acc[member] = 0;
-                    return acc;
-                }, {});
-
-                data.transactions.forEach(t => {
-                    if (memberTotals.hasOwnProperty(t.depositorName)) {
-                        memberTotals[t.depositorName] += t.amount;
-                    }
+                // onSnapshot: รับฟังการเปลี่ยนแปลงแบบเรียลไทม์
+                onSnapshot(q, (querySnapshot) => {
+                    const transactions = [];
+                    querySnapshot.forEach((doc) => {
+                        // ดึงข้อมูลและรวม doc.id เข้าไปด้วย (ถ้าจำเป็น)
+                        transactions.push({ id: doc.id, ...doc.data() });
+                    });
+                    
+                    console.log(`Received ${transactions.length} transactions from Firestore.`);
+                    
+                    // ประมวลผลและแสดงผลข้อมูล
+                    processAndDisplayData(transactions);
+                }, (error) => {
+                    console.error('Error listening to Firestore:', error);
+                    showMessage('เกิดข้อผิดพลาดในการรับข้อมูลจากฐานข้อมูลแบบเรียลไทม์', 'error');
                 });
-
-                MEMBERS.forEach(member => {
-                    const el = document.getElementById(`amount${member}`);
-                    if (el) {
-                        el.textContent = formatCurrency(memberTotals[member]);
-                    }
-                });
-
-                // 2.3 แสดงประวัติการออม
-                displayTransactionHistory(data.transactions);
 
             } catch (error) {
-                console.error('Error fetching savings data:', error);
-                // แสดงข้อความ error ให้ผู้ใช้เห็น
-                showMessage('เกิดข้อผิดพลาดในการดึงข้อมูล: โปรดตรวจสอบว่า Backend Server ทำงานอยู่หรือไม่', 'error');
+                console.error('Error setting up listener:', error);
+                showMessage('ไม่สามารถตั้งค่าตัวรับข้อมูลเรียลไทม์ได้', 'error');
             }
         }
 
+        function processAndDisplayData(transactions) {
+            // 2.1 แสดงยอดรวมทั้งหมด
+            const totalSavings = transactions.reduce((sum, t) => sum + (t.amount || 0), 0);
+            totalAmountElement.textContent = formatCurrency(totalSavings);
+
+            // 2.2 แสดงยอดออมแยกรายบุคคล
+            const memberTotals = MEMBERS.reduce((acc, member) => {
+                acc[member] = 0;
+                return acc;
+            }, {});
+
+            transactions.forEach(t => {
+                // ใช้ depositorName ที่เก็บใน DB
+                const key = t.depositorName; 
+                if (memberTotals.hasOwnProperty(key)) {
+                    memberTotals[key] += t.amount;
+                }
+            });
+
+            MEMBERS.forEach(member => {
+                const el = document.getElementById(`amount${member}`);
+                if (el) {
+                    el.textContent = formatCurrency(memberTotals[member] || 0);
+                }
+            });
+
+            // 2.3 แสดงประวัติการออม
+            displayTransactionHistory(transactions);
+        }
+        
         // ฟังก์ชันแสดงรายการในตาราง
         function displayTransactionHistory(transactions) {
             transactionTableBody.innerHTML = ''; // เคลียร์ข้อมูลเก่า
-            
-            // เรียงลำดับจากใหม่ไปเก่าตามวันที่บันทึก (createdAt)
-            const sortedTransactions = transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-            sortedTransactions.forEach(t => {
+            transactions.forEach((t, index) => {
                 const row = transactionTableBody.insertRow();
                 
-                // แปลงวันที่ให้อ่านง่าย
-                const formattedDate = new Date(t.createdAt).toLocaleDateString('th-TH', {
+                // ใช้ Tailwind สำหรับการจัดสไตล์แถวสลับสี
+                if (index % 2 === 1) {
+                    row.classList.add('bg-gray-50');
+                } else {
+                    row.classList.add('bg-white');
+                }
+                row.classList.add('hover:bg-blue-50', 'transition-colors', 'duration-150');
+
+                // แปลง createdAt ให้อ่านง่าย (ใช้ createdAt เนื่องจากไม่มี slipUrl/depositDate ที่แน่นอนแล้ว)
+                const dateToDisplay = t.createdAt || t.depositDate || new Date().toISOString();
+                const formattedDate = new Date(dateToDisplay).toLocaleDateString('th-TH', {
                     day: '2-digit', month: 'short', year: 'numeric'
                 });
 
                 row.insertCell().textContent = formattedDate;
                 row.insertCell().textContent = t.depositorName;
-                row.insertCell().textContent = formatCurrency(t.amount).replace(' บาท', ''); // แสดงเฉพาะตัวเลข
                 
-                const slipCell = row.insertCell();
-                const viewBtn = document.createElement('button');
-                viewBtn.textContent = 'ดูสลิป';
-                viewBtn.className = 'view-slip-btn';
-                // ตั้งค่าฟังก์ชันเรียก Modal เมื่อคลิก โดยส่ง slipUrl ไปด้วย
-                viewBtn.onclick = () => showSlipModal(t.slipUrl);
-                slipCell.appendChild(viewBtn);
+                const amountCell = row.insertCell();
+                amountCell.classList.add('font-semibold', 'text-green-600');
+                amountCell.textContent = formatCurrency(t.amount || 0).replace(' บาท', ''); // แสดงเฉพาะตัวเลข
             });
-        }
-
-        // ฟังก์ชันแสดง Modal ดูสลิป
-        function showSlipModal(slipUrl) {
-            // โหลดรูปภาพสลิปจาก Backend URL + slip path
-            modalSlipImage.src = `${BACKEND_URL}${slipUrl}`;
-            slipModal.style.display = 'block';
+            
+            // ถ้าไม่มีรายการ
+            if (transactions.length === 0) {
+                const row = transactionTableBody.insertRow();
+                const cell = row.insertCell();
+                cell.colSpan = 3;
+                cell.classList.add('text-center', 'py-4', 'text-gray-500', 'italic');
+                cell.textContent = 'ยังไม่มีรายการออมในระบบ';
+            }
         }
 
         // -------------------------------------------------------------------
-        // 3. ฟังก์ชันบันทึกรายการออมใหม่ (Submit Form)
+        // 3. ฟังก์ชันบันทึกรายการออมใหม่ (Submit Form) - ใช้ Firestore
         // -------------------------------------------------------------------
 
         savingForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+
+            if (!userId) {
+                showMessage('ยังไม่สามารถเชื่อมต่อฐานข้อมูลได้ กรุณารอสักครู่', 'error');
+                return;
+            }
             
-            const formData = new FormData(savingForm);
-            
+            const depositorName = document.getElementById('depositorName').value;
+            const depositDate = document.getElementById('depositDate').value;
+            const depositAmount = document.getElementById('depositAmount').value;
+
             // ตรวจสอบค่าก่อนส่ง
-            const amount = parseFloat(formData.get('depositAmount'));
+            const amount = parseFloat(depositAmount);
             if (isNaN(amount) || amount <= 0) {
                 showMessage('กรุณาป้อนจำนวนเงินที่ถูกต้อง (มากกว่า 0)', 'error');
                 return;
@@ -580,84 +356,50 @@
 
             submitBtn.disabled = true;
             submitBtn.textContent = 'กำลังบันทึก...';
+            submitBtn.classList.add('bg-gray-400');
+            submitBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
             
             try {
-                // ส่งข้อมูล (รวมถึงไฟล์สลิป) ไปยัง API
-                const response = await fetch(`${BACKEND_URL}/api/savings/deposit`, {
-                    method: 'POST',
-                    body: formData // FormData จะจัดการ Content-Type: multipart/form-data เอง
-                });
-                
-                if (response.status === 400) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'ข้อมูลไม่สมบูรณ์ หรือไฟล์สลิปมีปัญหา');
-                }
-                
-                if (!response.ok) {
-                    throw new Error('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
-                }
+                const newTransaction = {
+                    depositorName: depositorName,
+                    depositDate: depositDate, // เก็บวันที่ป้อนจากฟอร์ม
+                    amount: amount,
+                    createdAt: new Date().toISOString() // เวลาที่บันทึก
+                };
+
+                // บันทึกข้อมูลไปยัง Firestore
+                const docRef = await addDoc(collection(db, getCollectionPath()), newTransaction);
                 
                 showMessage('บันทึกการออมสำเร็จ!');
                 savingForm.reset(); // ล้างฟอร์ม
-                fetchSavingsData(); // โหลดข้อมูลใหม่
                 
+                // ตั้งค่าวันที่ปัจจุบันกลับเข้าไปในฟอร์มหลังรีเซ็ต
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('depositDate').value = today;
+
+                // ไม่ต้องเรียก fetchSavingsData() เพราะ onSnapshot จะทำงานอัตโนมัติ
+
             } catch (error) {
-                console.error('Error submitting form:', error);
-                showMessage('บันทึกไม่สำเร็จ: ' + error.message, 'error');
+                console.error('Error submitting to Firestore:', error);
+                showMessage('บันทึกไม่สำเร็จ: เกิดข้อผิดพลาดกับฐานข้อมูล', 'error');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'บันทึกการออม';
+                submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                submitBtn.classList.remove('bg-gray-400');
             }
         });
 
         // -------------------------------------------------------------------
-        // 4. ฟังก์ชันส่งออกข้อมูลเป็น CSV
+        // 4. Initial Load
         // -------------------------------------------------------------------
 
-        exportCsvBtn.addEventListener('click', async () => {
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/savings/export`);
-                if (!response.ok) {
-                    throw new Error('Failed to export data.');
-                }
-
-                // การดาวน์โหลดไฟล์ CSV
-                const blob = await response.blob();
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = 'saving_history.csv';
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                
-                showMessage('ส่งออกไฟล์ CSV สำเร็จ!');
-                
-            } catch (error) {
-                console.error('Error exporting CSV:', error);
-                showMessage('ส่งออก CSV ไม่สำเร็จ: ' + error.message, 'error');
-            }
-        });
-
-
-        // -------------------------------------------------------------------
-        // 5. Initial Load
-        // -------------------------------------------------------------------
-
-        // กำหนดวันที่เริ่มต้นในฟอร์มเป็นวันปัจจุบันและโหลดข้อมูล
+        // กำหนดวันที่เริ่มต้นในฟอร์มเป็นวันปัจจุบัน
         document.addEventListener('DOMContentLoaded', () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('depositDate').value = today;
-            fetchSavingsData();
+            // setupRealtimeListener จะถูกเรียกใน onAuthStateChanged
         });
-
-        // ปิด modal เมื่อคลิกภายนอก
-        window.onclick = function(event) {
-            if (event.target == slipModal) {
-                slipModal.style.display = "none";
-            }
-        }
 
     </script>
 </body>
