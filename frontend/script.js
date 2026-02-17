@@ -1,6 +1,7 @@
 // frontend/script.js
 const API_BASE_URL = 'https://saving-project.onrender.com/api';
 
+
 // **อัปเดตรายการชื่อผู้ออมใหม่**
 const userNames = ["ออมสิน", "เบนซ์", "แพร", "มิ้ว"]; 
 
