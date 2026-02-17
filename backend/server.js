@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // -------------------------------------------------------------------
 // 1. Multer Setup: กำหนดที่เก็บไฟล์ชั่วคราว (Simulated Storage)
@@ -114,7 +114,7 @@ app.post('/api/savings/deposit', upload.single('slipUpload'), async (req, res) =
 
         const newSaving = new Savings({
             depositorName: depositorName,
-            depositAmount: parseFloat(depositAmount),
+
             date: depositDate ? new Date(depositDate) : Date.now(),
             // บันทึก Path ของไฟล์ที่ Server สามารถเข้าถึงได้
             slipUrl: `/uploads/${req.file.filename}` 

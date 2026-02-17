@@ -1,6 +1,8 @@
 // frontend/script.js
 
 const API_BASE_URL = 'http://localhost:3000/api';
+
+
 // **อัปเดตรายการชื่อผู้ออมใหม่**
 const userNames = ["ออมสิน", "เบนซ์", "แพร", "มิ้ว"]; 
 
